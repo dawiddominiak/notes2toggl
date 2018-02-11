@@ -5,13 +5,14 @@ const { promisify } = require('util');
 const fs = require('fs');
 
 const readFileAsync = promisify(fs.readFile);
-const notesFile = process.argv.length > 1 && process.argv[1];
+const notesFile = process.argv.length > 2 && process.argv[2];
 
 async function main() {
   try {
-    const notes = await notesFile ? readFileAsync(notesFile) : getStdin();
+    const notes = notesFile ? await readFileAsync(notesFile) : await getStdin();
     const timeEntryData = parseNotes(notes);
-    const results = sendToToggl(timeEntryData);
+    console.log(timeEntryData);
+    const results = await sendToToggl(timeEntryData);
     console.log(results);
     process.exit(0);
   } catch (err) {

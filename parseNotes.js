@@ -14,7 +14,9 @@ function findProjectId(line) {
 }
 
 function findTags(line) {
-  return line.match(TAG_REGEXP);
+  return line
+    .match(TAG_REGEXP)
+    .map(tag => tag.slice(1));
 }
 
 function findDescription(line) {
@@ -28,8 +30,8 @@ function findDescription(line) {
 
 function findStartAndDuration(line, lastDate) {
   const [, startHour, startMinute, endHour, endMinute] = HOURS_REGEXP.exec(line);
-  const startMoment = lastDate.hour(startHour).minute(startMinute);
-  const endMoment = lastDate.hour(endHour).minute(endMinute);
+  const startMoment = moment(lastDate).hour(startHour).minute(startMinute);
+  const endMoment = moment(lastDate).hour(endHour).minute(endMinute);
   const duration = endMoment.diff(startMoment, 'seconds');
 
   return [startMoment.toDate(), duration];
@@ -53,6 +55,8 @@ function parseNotes(notes) {
         pid,
         start,
         duration,
+        billable: true,
+        created_with: 'notes2toggl',
       });
     } else if (!EMPTY_LINE_REGEXP.test(line)) {
       console.error(`Could not parse line "${line}". Input from ${lastDate.format('DD.MM.YYYY')}.`);
