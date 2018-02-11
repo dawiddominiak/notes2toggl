@@ -1,4 +1,4 @@
-#notes2toggl
+# notes2toggl
 Script to log time in Toggl by text file in given format.
 
 Notes format
@@ -11,7 +11,7 @@ Notes format
 8:00 - 9:00 I did something on the next day [Project ID]
 ```
 
-##Usage
+## Usage
 If installed globally:
 
 export API_TOKEN:
