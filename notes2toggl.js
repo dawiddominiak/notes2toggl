@@ -11,9 +11,7 @@ async function main() {
   try {
     const notes = notesFile ? await readFileAsync(notesFile) : await getStdin();
     const timeEntryData = parseNotes(notes);
-    console.log(timeEntryData);
-    const results = await sendToToggl(timeEntryData);
-    console.log(results);
+    await sendToToggl(timeEntryData);
     process.exit(0);
   } catch (err) {
     console.log(err);
