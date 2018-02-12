@@ -40,9 +40,13 @@ function parseNotes(notes) {
   const lines = notes.split('\n');
   let lastDate = null;
   return lines.reduce((timeEntries, line) => {
-    if (/^\s*[0-9]{1,2}\.[0-9]{2}\.[0-9]{4}\s*$/g.test(line)) {
+    const isDate = /^\s*[0-9]{1,2}\.[0-9]{2}\.[0-9]{4}\s*$/g.test(line);
+    const isEntry = HOURS_REGEXP.test(line);
+    const isEmptyLine = EMPTY_LINE_REGEXP.test(line);
+
+    if (isDate) {
       lastDate = moment(line.trim(), 'DD.MM.YYYY');
-    } else if (HOURS_REGEXP.test(line)) {
+    } else if (isEntry) {
       const pid = findProjectId(line);
       const tags = findTags(line);
       const description = findDescription(line);
@@ -57,7 +61,7 @@ function parseNotes(notes) {
         billable: true,
         created_with: 'notes2toggl',
       });
-    } else if (!EMPTY_LINE_REGEXP.test(line)) {
+    } else if (!isEmptyLine) {
       console.error(`Could not parse line "${line}". Input from ${lastDate.format('DD.MM.YYYY')}.`);
     }
 
