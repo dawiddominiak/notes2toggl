@@ -10,7 +10,7 @@ const notesFile = process.argv.length > 2 && process.argv[2];
 async function main() {
   try {
     const notes = notesFile ? await readFileAsync(notesFile) : await getStdin();
-    const timeEntryData = parseNotes(notes);
+    const timeEntryData = parseNotes(notes.toString());
     await sendToToggl(timeEntryData);
     process.exit(0);
   } catch (err) {
