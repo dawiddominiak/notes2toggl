@@ -14,9 +14,8 @@ function findProjectId(line) {
 }
 
 function findTags(line) {
-  return line
-    .match(TAG_REGEXP)
-    .map(tag => tag.slice(1));
+  const matches = line.match(TAG_REGEXP);
+  return !matches ? [] : matches.map(tag => tag.slice(1));
 }
 
 function findDescription(line) {
