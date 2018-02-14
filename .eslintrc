@@ -2,6 +2,7 @@
   "extends": "airbnb",
   "rules": {
     "no-console": "off",
-    "func-names": ["error", "never"]
+    "func-names": ["error", "never"],
+    "function-paren-newline": "off"
   }
 }

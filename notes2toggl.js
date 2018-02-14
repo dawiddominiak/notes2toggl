@@ -1,9 +1,10 @@
 const getStdin = require('get-stdin');
-const parseNotes = require('./parseNotes');
-const sendToToggl = require('./sendToToggl');
+const NotesParser = require('./NotesParser');
+const TogglService = require('./TogglService');
 const { promisify } = require('util');
 const fs = require('fs');
 
+const { API_TOKEN, WORKSPACE_ID } = process.env;
 const readFileAsync = promisify(fs.readFile);
 const notesFile = process.argv.length > 2 && process.argv[2];
 
@@ -17,9 +18,13 @@ function logSuccess(results) {
 
 async function main() {
   try {
+    const togglService = new TogglService(API_TOKEN, WORKSPACE_ID);
+    const notesParser = new NotesParser(togglService);
+
     const notes = notesFile ? await readFileAsync(notesFile) : await getStdin();
-    const timeEntryData = await parseNotes(notes.toString());
-    const results = await sendToToggl(timeEntryData);
+    const timeEntryData = await notesParser.parse(notes.toString());
+    const results = await togglService.sendTimeEntries(timeEntryData);
+
     logSuccess(results);
     process.exit(0);
   } catch (err) {
