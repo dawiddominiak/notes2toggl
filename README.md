@@ -31,4 +31,4 @@ notes2toggl note.txt
 ```
 
 ## Thanks
-Special thanks for [https://www.swingdev.io](Swing Development) - company I am working for, for give me time for needed upgrades during working hours.
+Special thanks for [Swing Development](https://www.swingdev.io) - company I am working for, for give me time for needed upgrades during working hours.
