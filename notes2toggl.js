@@ -11,7 +11,7 @@ const notesFile = process.argv.length > 2 && process.argv[2];
 function logSuccess(results) {
   console.log('The following entries were successfully added:');
   results.forEach((result, i) => {
-    const tagsDescription = typeof result.tags === 'undefined' ? 'no tags' : `the following tags ${result.tags.join(', ')}`
+    const tagsDescription = typeof result.tags === 'undefined' ? 'no tags' : `the following tags ${result.tags.join(', ')}`;
     console.log(`${i + 1}. ${result.description} with ${tagsDescription}.`);
   });
 }
