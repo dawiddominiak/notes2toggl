@@ -24,9 +24,10 @@ npm i -g notes2toggl
 ## Usage
 If installed globally:
 
-export API_TOKEN:
+export API_TOKEN and WORKSPACE_ID:
 ```
-API_TOKEN=***
+export API_TOKEN=***
+export WORKSPACE_ID=***
 ```
 and use it:
 
