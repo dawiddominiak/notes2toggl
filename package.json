@@ -1,6 +1,6 @@
 {
   "name": "notes2toggl",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Parse notes and is logging to Toggl",
   "main": "notes2toggl.js",
   "repository": "https://github.com/dawiddominiak/notes2toggl.git",
@@ -13,6 +13,7 @@
     "node": ">= 9.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "get-stdin": "^5.0.1",
     "moment": "^2.20.1",
     "toggl-api": "^1.0.1"

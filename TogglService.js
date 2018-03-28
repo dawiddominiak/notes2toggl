@@ -1,5 +1,7 @@
 const TogglClient = require('toggl-api');
-const { promisify } = require('util');
+const Promise = require('bluebird');
+
+const DELAY_AFTER_SINGLE_ENTRY_IN_MS = 200;
 
 class TogglService {
   constructor(apiToken, workspaceId) {
@@ -9,7 +11,7 @@ class TogglService {
   }
 
   async getProjectsMap() {
-    const getWorkspaceProjectsAsync = promisify(
+    const getWorkspaceProjectsAsync = Promise.promisify(
       this.togglClient.getWorkspaceProjects.bind(this.togglClient),
     );
     const projects = await getWorkspaceProjectsAsync(this.workspaceId);
@@ -18,8 +20,19 @@ class TogglService {
   }
 
   async sendTimeEntries(timeEntires = []) {
-    const createTimeEntryAsync = promisify(this.togglClient.createTimeEntry.bind(this.togglClient));
-    const results = await Promise.all(timeEntires.map(entry => createTimeEntryAsync(entry)));
+    const createTimeEntryAsync = Promise
+      .promisify(
+        this.togglClient.createTimeEntry.bind(this.togglClient),
+      );
+
+    const results = await Promise.map(
+      timeEntires,
+      entry => createTimeEntryAsync(entry)
+        .delay(DELAY_AFTER_SINGLE_ENTRY_IN_MS),
+      {
+        concurrency: 1,
+      },
+    );
 
     return results;
   }
