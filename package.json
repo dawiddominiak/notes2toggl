@@ -1,6 +1,6 @@
 {
   "name": "notes2toggl",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Parse notes and is logging to Toggl",
   "main": "notes2toggl.js",
   "repository": "https://github.com/dawiddominiak/notes2toggl.git",

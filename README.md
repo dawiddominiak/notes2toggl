@@ -11,6 +11,16 @@ Notes format
 8:00 - 9:00 I did something on the next day [Project ID or Name]
 ```
 
+## Requirements
+```
+node >= 9.0.0
+```
+
+## Installation
+```
+npm i -g notes2toggl
+```
+
 ## Usage
 If installed globally:
 
