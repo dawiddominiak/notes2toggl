@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const getStdin = require('get-stdin');
 const NotesParser = require('./NotesParser');
 const TogglService = require('./TogglService');

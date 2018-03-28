@@ -1,11 +1,17 @@
 {
   "name": "notes2toggl",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Parse notes and is logging to Toggl",
   "main": "notes2toggl.js",
   "repository": "https://github.com/dawiddominiak/notes2toggl.git",
   "author": "poczta@dawiddominiak.pl",
   "license": "MIT",
+  "bin": {
+    "notes2toggl": "./notes2toggl.js"
+  },
+  "engines": {
+    "node": ">= 9.0"
+  },
   "dependencies": {
     "get-stdin": "^5.0.1",
     "moment": "^2.20.1",
