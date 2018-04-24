@@ -18,6 +18,7 @@ class LineDestructor {
     const tags = this.desctructTags();
     const [start, duration] = await this.desctructStartAndDuration();
     const description = this.desctructDescription();
+    const billable = this.destructProjectIsBillable(pid);
 
     return {
       ...options,
@@ -26,7 +27,7 @@ class LineDestructor {
       pid,
       start,
       duration,
-      billable: true,
+      billable,
     };
   }
 
@@ -77,10 +78,15 @@ class LineDestructor {
       .match(regexp)
       .map(match => match.trim().slice(1, -1))[0];
 
-    const projectId = this.projectsMap[projectName];
+    const projectId = this.projectsMap[projectName].id;
     this.modificated = this.modificated.replace(regexp, '');
 
     return projectId;
+  }
+
+  destructProjectIsBillable(id) {
+    const project = Object.values(this.projectsMap).find(p => p.id === id);
+    return project.isBillable;
   }
 
   desctructStartAndDuration() {

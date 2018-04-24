@@ -1,5 +1,6 @@
 const TogglClient = require('toggl-api');
 const Promise = require('bluebird');
+const Project = require('./model/Project');
 
 const DELAY_AFTER_SINGLE_ENTRY_IN_MS = 200;
 
@@ -16,7 +17,7 @@ class TogglService {
     );
     const projects = await getWorkspaceProjectsAsync(this.workspaceId);
     return projects.reduce((map, project) =>
-      ({ ...map, [project.name]: parseInt(project.id, 10) }), {});
+      ({ ...map, [project.name]: Project.fromTogglEntry(project) }), {});
   }
 
   async sendTimeEntries(timeEntires = []) {
