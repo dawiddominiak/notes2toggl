@@ -16,4 +16,4 @@ describe('NotesParser', () => {
     expect(+entries[0].start).to.equal(1524211200000);
     expect(entries[0].billable).to.equal(true);
   });
-})
+});

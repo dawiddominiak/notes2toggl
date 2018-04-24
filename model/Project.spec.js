@@ -18,5 +18,5 @@ describe('Project model', () => {
     });
     expect(project.id).to.equal(30);
     expect(project.isBillable).to.equal(false);
-  })
+  });
 });
