@@ -18,20 +18,26 @@ function logSuccess(results) {
   });
 }
 
-async function main() {
-  try {
-    const togglService = new TogglService(API_TOKEN, WORKSPACE_ID);
-    const notesParser = new NotesParser(togglService);
+async function parse(notesPromiseOrValue, { apiToken = API_TOKEN, workspaceId = WORKSPACE_ID }) {
+  const togglService = new TogglService(apiToken, workspaceId);
+  const notesParser = new NotesParser(togglService);
+  const notes = await notesPromiseOrValue;
+  const timeEntryData = await notesParser.parse(notes.toString());
+  const results = await togglService.sendTimeEntries(timeEntryData);
 
-    const notes = notesFile ? await readFileAsync(notesFile) : await getStdin();
-    const timeEntryData = await notesParser.parse(notes.toString());
-    const results = await togglService.sendTimeEntries(timeEntryData);
-
-    logSuccess(results);
-    process.exit(0);
-  } catch (err) {
-    console.log(err);
-    process.exit(1);
-  }
+  return results;
 }
-main();
+
+if (require.main === module) {
+  parse(notesFile ? readFileAsync(notesFile) : getStdin())
+    .then((results) => {
+      logSuccess(results);
+      process.exit(0);
+    })
+    .catch((error) => {
+      console.error(error);
+      process.exit(1);
+    });
+} else {
+  module.exports = parse;
+}

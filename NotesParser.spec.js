@@ -1,6 +1,8 @@
-const {expect} = require('chai');
+const { expect } = require('chai');
 const NotesParser = require('./NotesParser');
-const MockTogglService = new (require('./mocks/TogglService'));
+const TogglServiceMock = require('./mocks/TogglService');
+
+const MockTogglService = new TogglServiceMock();
 
 const notes1 = `20.04.2018
 10:00 - 12:00 First task [Project]`;

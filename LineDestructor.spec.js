@@ -1,6 +1,8 @@
 const LineDestructor = require('./LineDestructor');
-const MockTogglService = new (require('./mocks/TogglService'));
-const {expect} = require('chai');
+const TogglServiceMock = require('./mocks/TogglService');
+
+const MockTogglService = new TogglServiceMock();
+const { expect } = require('chai');
 const moment = require('moment');
 
 const date = moment('2018-05-04');

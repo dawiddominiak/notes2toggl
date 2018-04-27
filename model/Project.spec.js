@@ -1,5 +1,5 @@
 const Project = require('./Project');
-const {expect} = require('chai');
+const { expect } = require('chai');
 
 describe('Project model', () => {
   it('should instantiate proper model', () => {

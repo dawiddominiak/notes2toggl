@@ -1,8 +1,15 @@
 {
   "extends": "airbnb",
+  "plugins": [
+    "mocha"
+  ],
   "rules": {
     "no-console": "off",
     "func-names": ["error", "never"],
-    "function-paren-newline": "off"
+    "function-paren-newline": "off",
+    "class-methods-use-this": 0
+  },
+  "env": {
+    "mocha": true
   }
 }

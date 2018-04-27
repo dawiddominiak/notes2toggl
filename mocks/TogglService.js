@@ -9,12 +9,12 @@ class TogglService {
 
   async getProjectsMap() {
     return {
-      'Project': new Project({ id: 5, billable: true }),
-      'Activity': new Project({ id: 10, billable: false }),
+      Project: new Project({ id: 5, billable: true }),
+      Activity: new Project({ id: 10, billable: false }),
     };
   }
 
-  async sendTimeEntries(timeEntires = []) {
+  async sendTimeEntries() {
     return Promise.resolve();
   }
 }
