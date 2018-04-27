@@ -18,7 +18,16 @@ function logSuccess(results) {
   });
 }
 
-async function parse(notesPromiseOrValue, { apiToken = API_TOKEN, workspaceId = WORKSPACE_ID }) {
+async function parse(
+  notesPromiseOrValue,
+  {
+    apiToken = API_TOKEN,
+    workspaceId = WORKSPACE_ID,
+  } = {
+    apiToken: API_TOKEN,
+    workspaceId: WORKSPACE_ID,
+  },
+) {
   const togglService = new TogglService(apiToken, workspaceId);
   const notesParser = new NotesParser(togglService);
   const notes = await notesPromiseOrValue;
